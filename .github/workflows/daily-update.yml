@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5 # Prevents script from running forever if it freezes
     steps:
-      # 1. Checkout code using your secret token
+      # 1. Checkout code using secret token
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.PAT_TOKEN }}
 
-      # 2. Your daily task goes here
+      # 2. Daily task goes here
       - name: Run update script
         run: |
           echo "Last updated on $(date)" > auto-update.txt
 
       # 3. Commit and push changes
-      - name: Commit and push as yourself
+      - name: Commit and push with my name
         run: |
           # Replace these with your actual details
-          git config --global user.name "Your GitHub Username"
-          git config --global user.email "your-email@example.com"
+          git config --global user.name "JustATurtleDuck"
+          git config --global user.email "72314242+JustATurtleDuck@users.noreply.github.com"
           
           git add auto-update.txt
           git commit -m "Daily automated update" || exit 0
