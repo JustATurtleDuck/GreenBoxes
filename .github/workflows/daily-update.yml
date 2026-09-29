@@ -1,0 +1,33 @@
+name: Daily Auto-Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at midnight UTC daily
+  workflow_dispatch: # Allows manual testing
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5 # Prevents script from running forever if it freezes
+    steps:
+      # 1. Checkout code using your secret token
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      # 2. Your daily task goes here
+      - name: Run update script
+        run: |
+          echo "Last updated on $(date)" > auto-update.txt
+
+      # 3. Commit and push changes
+      - name: Commit and push as yourself
+        run: |
+          # Replace these with your actual details
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "your-email@example.com"
+          
+          git add auto-update.txt
+          git commit -m "Daily automated update" || exit 0
+          git push
