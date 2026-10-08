@@ -2,7 +2,7 @@ name: Daily Auto-Update
 
 on:
   schedule:
-    - cron: '0 0, 12 * * *' # Runs at midnight and noon UTC daily
+    - cron: '0 0,12 * * *' # Runs at midnight and noon UTC daily
   workflow_dispatch: # Allows manual testing
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       # 3. Commit and push changes
       - name: Commit and push with my name
         run: |
-          # Replace these with your actual details
+          # Replace these with actual details
           git config --global user.name "JustATurtleDuck"
           git config --global user.email "72314242+JustATurtleDuck@users.noreply.github.com"
           
